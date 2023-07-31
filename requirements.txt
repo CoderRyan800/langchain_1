@@ -1,0 +1,11 @@
+numpy
+scipy
+pandas
+openai
+langchain
+jupyter
+python-dotenv
+chromadb
+tiktoken
+pypdf
+tqdm

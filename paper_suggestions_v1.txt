@@ -1,46 +1,59 @@
-To rewrite this document for a peer-reviewed journal like PlosONE, you need to follow a structured format that includes an abstract, introduction, methods, results, discussion, and conclusion. Here's a detailed outline and steps to follow:
+To rewrite this document for a peer-reviewed journal like PLoS ONE, you need to follow the structure and guidelines provided by the journal. Here's a detailed outline and steps to follow:
 
-1. Title: Make sure the title is concise, informative, and accurately reflects the content of the study.
+Title: 
+"Neural Networks and Symbolic Reasoning: A Study on Self-Awareness and Agent Cooperation"
 
-2. Abstract: Summarize the purpose of the study, the methods used, the key findings, and the main conclusions drawn from the results. 
+Abstract:
+Provide a brief summary of the research, including the purpose, methods used, key findings, and implications.
 
-3. Introduction: 
-   - Background: Provide a brief overview of the field of neural networks and symbolic reasoning. Cite relevant literature.
-   - Problem Statement: Discuss the problem that the agents are trained to solve.
-   - Objectives: State the objectives of the study.
+1. Introduction:
+   - Background of neural networks and symbolic reasoning.
+   - Importance and relevance of the study.
+   - Objectives of the research.
 
-4. Methods: 
-   - Agent Training: Describe the process of training the agents, including the logic concepts and operators used.
-   - Agent Cooperation: Explain how the agents cooperate to solve problems. Use examples to illustrate this process.
-   - Data and Tools: Discuss the source code used, the Python repository, and the Keras documentation. Explain how the sequence-to-sequence models were created and trained.
+2. Literature Review:
+   - Discuss previous work in the field of neural networks and symbolic reasoning.
+   - Discuss the use of LSTMs for neuro-symbolic tasks.
+   - Discuss self-awareness in neural networks.
 
-5. Results: 
-   - Present the key results of the study, including the error rate found and the performance of the agents. 
-   - Discuss the results of the two examples given in the original document.
+3. Methodology:
+   - Explain the problem agents are trained to solve.
+   - Discuss the training and validation data for the agents.
+   - Explain the use of LSTM-based seq2seq architecture.
+   - Discuss the source code and its sources.
 
-6. Discussion: 
-   - Interpret the results in the context of the objectives of the study. 
-   - Discuss the implications of the results for the field of neural networks and symbolic reasoning.
-   - Compare and contrast your findings with those of previous studies.
+4. Results:
+   - Discuss the agent cooperation examples.
+   - Discuss the key results, including the error rate and the validation data set.
 
-7. Conclusion: 
-   - Summarize the main findings of the study.
-   - Discuss the limitations of the study and suggest areas for future research.
+5. Discussion:
+   - Interpret the results.
+   - Discuss the concept of learning a knowledge state.
+   - Discuss the agents' ability to answer a question if the answer is known and to recognize a lack of knowledge.
 
-8. Acknowledgements: Acknowledge the contributions of those who assisted with the study.
+6. Future Work:
+   - Discuss possible future directions, including adding a broader range of problems, having agents dump knowledge more selectively, and changing from the existing LSTM-based seq2seq architecture to the Transformer based architecture.
 
-9. References: Cite all sources referenced in the paper in the appropriate format.
+7. Conclusion:
+   - Summarize the findings and their implications.
+   - Discuss the contribution of the research to the field.
+
+8. Acknowledgements:
+   - Acknowledge the feedback and advice received from others.
+
+9. References:
+   - Cite all the references used in the research.
 
 Steps to follow for the re-write:
 
-1. Read through the original document thoroughly to understand the content and the flow of ideas.
-2. Start by drafting the title and the abstract.
-3. Write the introduction, providing a brief overview of the field and stating the objectives of the study.
-4. Describe the methods used in the study, including the process of training the agents and the tools used.
-5. Present the results of the study, using tables or figures where necessary to illustrate the findings.
-6. Discuss the results, interpreting them in the context of the study's objectives and comparing them with previous research.
-7. Write the conclusion, summarizing the main findings and suggesting areas for future research.
-8. Acknowledge the contributions of those who assisted with the study.
-9. Cite all sources referenced in the paper.
-10. Review the draft, checking for clarity, coherence, and grammatical errors.
-11. Revise the draft based on the review and prepare the final version of the paper.
+1. Read the PLoS ONE guidelines for authors to understand the specific requirements of the journal.
+2. Start with the title and abstract, making sure they are concise and informative.
+3. Write the introduction, providing a clear background and stating the objectives of the research.
+4. In the literature review, discuss previous work in the field, making sure to cite all sources.
+5. In the methodology section, provide a detailed explanation of the methods used in the research.
+6. Present the results clearly and objectively.
+7. In the discussion section, interpret the results and discuss their implications.
+8. Discuss possible future work in the field.
+9. Write the conclusion, summarizing the findings and their implications.
+10. Acknowledge the contributions of others in the acknowledgements section.
+11. Finally, cite all the references used in the research.

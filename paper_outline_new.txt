@@ -1,0 +1,39 @@
+Title: "Epistemic Self-Awareness in LSTM-Based Agents: A Novel Approach to Uncertainty Quantification and Interpretability"
+
+I. Introduction
+- Brief overview of the study's focus on LSTM-based agents and their ability to understand their own knowledge state.
+- Explanation of the concept of self-awareness in the context of this study.
+- Brief mention of the two papers on epistemic self-awareness that will be cited later in the paper.
+
+II. Background and Literature Review
+- Overview of the field of neural networks and symbolic reasoning.
+- Discussion of previous work on self-awareness in neural networks.
+- Review of the two papers on epistemic self-awareness, discussing their findings and relevance to this study.
+
+III. Problem Statement
+- Detailed explanation of the problems that the agents are trained to solve.
+- Discussion of the importance of these problems in the context of neural networks and symbolic reasoning.
+
+IV. Methodology
+- Detailed explanation of the LSTM-based agent and its capabilities.
+- Discussion of the training process for the agents.
+- Explanation of how the agents maintain a concept of a propositional sentence as a unit of thought.
+
+V. Results and Discussion
+- Presentation of the results of the training process.
+- Discussion of the agents' ability to answer questions based on their state of knowledge.
+- Analysis of the agents' ability to recognize when they cannot answer a question and ask for help.
+
+VI. Future Directions
+- Discussion of potential future directions for this research, including adding a broader range of problems that can be solved and changing the architecture of the agents.
+- Mention of the potential for further exploration of the concept of self-awareness in neural networks.
+
+VII. Conclusion
+- Summary of the study's findings and their implications for the field of neural networks and symbolic reasoning.
+- Restatement of the importance of self-awareness in LSTM-based agents.
+
+VIII. Acknowledgements
+- Acknowledgement of those who provided valuable feedback and advice during the study.
+
+IX. References
+- Citation of all sources used in the paper, including the two papers on epistemic self-awareness.

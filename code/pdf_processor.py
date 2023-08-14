@@ -8,7 +8,7 @@ from langchain.chains import ConversationalRetrievalChain
 
 class pdf_processor(object):
 
-    def __init__(self, pdf_filename, chat_gpt_model_choice='gpt-4'):
+    def __init__(self, pdf_filename_list, chat_gpt_model_choice='gpt-4'):
         """
         Initializer for PDF handling object.  This object can load up a PDF and answer questions about it.
 
@@ -18,8 +18,14 @@ class pdf_processor(object):
 
         # Begin by loading the PDF file and splitting it into pages.
 
-        loader = PyPDFLoader(pdf_filename)
-        self.pages = loader.load_and_split()
+        first_document_flag = True
+        for current_pdf_filename in pdf_filename_list:
+            loader = PyPDFLoader(current_pdf_filename)
+            if first_document_flag:
+                self.pages = loader.load_and_split()
+                first_document_flag = False
+            else:
+                self.pages = self.pages + loader.load_and_split()
 
         # Next, we must load these pages into a vector store to allow processing.
         # Note we are using OpenAIembeddings since these translate human language into vectors

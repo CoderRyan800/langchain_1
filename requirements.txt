@@ -9,3 +9,8 @@ chromadb
 tiktoken
 pypdf
 tqdm
+pytesseract
+pdf2image
+PyPDF2
+reportlab
+ocr-nanonets-wrapper

@@ -1,4 +1,5 @@
 from langchain.document_loaders import PyPDFLoader
+from langchain.document_loaders import TextLoader
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.chat_models import ChatOpenAI
@@ -6,9 +7,36 @@ from langchain.chains import RetrievalQA
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 
+import io
+import os
+from pdf2image import convert_from_path
+from PIL import Image
+import pytesseract
+from PyPDF2 import PdfWriter, PdfReader
+from reportlab.pdfgen import canvas
+from nanonets import NANONETSOCR
+
+fp = open('/home/ryanmukai/Documents/github/nanoets_api_key_0.txt','r')
+nanonets_string = fp.readline()
+fp.close()
+
+nanonets_api_key_0 = nanonets_string.strip()
+
+def extract_text_from_pdf(pdf_path, output_text_path):
+
+    model = NANONETSOCR()
+    model.set_token(nanonets_api_key_0)
+
+    string = model.convert_to_string(pdf_path,formatting='lines and spaces') 
+    # DEBUG
+    print(string)
+    with open(output_text_path, 'w') as f:
+        f.write(string)
+
+
 class pdf_processor(object):
 
-    def __init__(self, pdf_filename_list, chat_gpt_model_choice='gpt-4'):
+    def __init__(self, pdf_filename_list, chat_gpt_model_choice='gpt-4',pdf_flag=True):
         """
         Initializer for PDF handling object.  This object can load up a PDF and answer questions about it.
 
@@ -17,15 +45,29 @@ class pdf_processor(object):
         """
 
         # Begin by loading the PDF file and splitting it into pages.
+        # Do only if pdf_flag is true.
 
-        first_document_flag = True
-        for current_pdf_filename in pdf_filename_list:
-            loader = PyPDFLoader(current_pdf_filename)
-            if first_document_flag:
-                self.pages = loader.load_and_split()
-                first_document_flag = False
-            else:
-                self.pages = self.pages + loader.load_and_split()
+        if pdf_flag:
+
+            first_document_flag = True
+            for current_pdf_filename in pdf_filename_list:
+                loader = PyPDFLoader(current_pdf_filename)
+                if first_document_flag:
+                    self.pages = loader.load_and_split()
+                    first_document_flag = False
+                else:
+                    self.pages = self.pages + loader.load_and_split()
+        else:
+
+            first_document_flag = True
+            for current_pdf_filename in pdf_filename_list:
+
+                loader = TextLoader(current_pdf_filename)
+                if first_document_flag:
+                    self.pages = loader.load_and_split()
+                    first_document_flag = False
+                else:
+                    self.pages = self.pages + loader.load_and_split()
 
         # Next, we must load these pages into a vector store to allow processing.
         # Note we are using OpenAIembeddings since these translate human language into vectors

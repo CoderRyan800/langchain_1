@@ -16,23 +16,49 @@ from PyPDF2 import PdfWriter, PdfReader
 from reportlab.pdfgen import canvas
 from nanonets import NANONETSOCR
 
-fp = open('/home/ryanmukai/Documents/github/nanoets_api_key_0.txt','r')
-nanonets_string = fp.readline()
-fp.close()
+# fp = open('/home/ryanmukai/Documents/github/nanoets_api_key_0.txt','r')
+# nanonets_string = fp.readline()
+# fp.close()
 
-nanonets_api_key_0 = nanonets_string.strip()
+# nanonets_api_key_0 = nanonets_string.strip()
+
+# def extract_text_from_pdf(pdf_path, output_text_path):
+
+#     model = NANONETSOCR()
+#     model.set_token(nanonets_api_key_0)
+
+#     string = model.convert_to_string(pdf_path,formatting='lines and spaces') 
+#     # DEBUG
+#     print(string)
+#     with open(output_text_path, 'w') as f:
+#         f.write(string)
+
+
+import pytesseract
+from pdf2image import convert_from_path
+
+pages = convert_from_path('test.pdf', 500)
+text = ''
+
+for page in pages:
+    text += pytesseract.image_to_string(page)
+
+fp = open('test.txt','w')
+fp.write(text)
+fp.close()
 
 def extract_text_from_pdf(pdf_path, output_text_path):
 
-    model = NANONETSOCR()
-    model.set_token(nanonets_api_key_0)
+    pages = convert_from_path(pdf_path, 500)
+    text = ''
 
-    string = model.convert_to_string(pdf_path,formatting='lines and spaces') 
+    for page in pages:
+        text += pytesseract.image_to_string(page)
+
     # DEBUG
-    print(string)
+    print(text)
     with open(output_text_path, 'w') as f:
-        f.write(string)
-
+        f.write(text)
 
 class pdf_processor(object):
 

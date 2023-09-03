@@ -14,3 +14,5 @@ pdf2image
 PyPDF2
 reportlab
 ocr-nanonets-wrapper
+PyMuPDF
+opencv-python

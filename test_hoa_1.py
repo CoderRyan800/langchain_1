@@ -38,7 +38,7 @@ for index in range(N):
 
     current_input_filename = input_pdf_list[index]
     current_output_filename = output_pdf_list[index]
-    extract_text_from_pdf(current_input_filename, current_output_filename)
+    extract_UnstructuredPDFLoader(current_input_filename, current_output_filename)
 
 proc_obj = pdf_processor(pdf_filename_list=output_pdf_list,
     chat_gpt_model_choice='gpt-4',pdf_flag=False)

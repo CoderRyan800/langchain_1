@@ -37,17 +37,14 @@ from nanonets import NANONETSOCR
 import pytesseract
 from pdf2image import convert_from_path
 
-pages = convert_from_path('test.pdf', 500)
-text = ''
+from langchain.document_loaders import PyPDFLoader
+from langchain.document_loaders import UnstructuredPDFLoader
+from langchain.document_loaders import PyPDFium2Loader
+from langchain.document_loaders import PDFMinerLoader
+from langchain.document_loaders import PyMuPDFLoader
+from langchain.document_loaders import PDFPlumberLoader
 
-for page in pages:
-    text += pytesseract.image_to_string(page)
-
-fp = open('test.txt','w')
-fp.write(text)
-fp.close()
-
-def extract_text_from_pdf(pdf_path, output_text_path):
+def extract_pytesseract(pdf_path, output_text_path):
 
     pages = convert_from_path(pdf_path, 500)
     text = ''
@@ -59,6 +56,114 @@ def extract_text_from_pdf(pdf_path, output_text_path):
     print(text)
     with open(output_text_path, 'w') as f:
         f.write(text)
+
+# End function extract_pytesseract
+
+def extract_PyPDFLoader(pdf_path, output_text_path):
+
+    loader = PyPDFLoader(pdf_path)
+
+    pages = loader.load_and_split()
+    text = ''
+
+    for page in pages:
+        text += page.page_content
+
+    # DEBUG
+    print(text)
+    with open(output_text_path, 'w') as f:
+        f.write(text)
+
+# End function extract_PyPDFLoader
+
+
+def extract_UnstructuredPDFLoader(pdf_path, output_text_path):
+
+    loader = UnstructuredPDFLoader(pdf_path)
+
+    pages = loader.load_and_split()
+    text = ''
+
+    for page in pages:
+        text += page.page_content
+
+    # DEBUG
+    print(text)
+    with open(output_text_path, 'w') as f:
+        f.write(text)
+
+# End function extract_UnstructuredPDFLoader
+
+
+def extract_PyPDFium2Loader(pdf_path, output_text_path):
+
+    loader = PyPDFium2Loader(pdf_path)
+
+    pages = loader.load_and_split()
+    text = ''
+
+    for page in pages:
+        text += page.page_content
+
+    # DEBUG
+    print(text)
+    with open(output_text_path, 'w') as f:
+        f.write(text)
+
+# End function extract_PyPDFium2Loader
+
+
+def extract_PDFMinerLoader(pdf_path, output_text_path):
+
+    loader = PDFMinerLoader(pdf_path)
+
+    pages = loader.load_and_split()
+    text = ''
+
+    for page in pages:
+        text += page.page_content
+
+    # DEBUG
+    print(text)
+    with open(output_text_path, 'w') as f:
+        f.write(text)
+
+# End function extract_PDFMinerLoader
+
+def extract_PyMuPDFLoader(pdf_path, output_text_path):
+
+    loader = PyMuPDFLoader(pdf_path)
+
+    pages = loader.load_and_split()
+    text = ''
+
+    for page in pages:
+        text += page.page_content
+
+    # DEBUG
+    print(text)
+    with open(output_text_path, 'w') as f:
+        f.write(text)
+
+# End function extract_PyMuPDFLoader
+
+def extract_PDFPlumberLoader(pdf_path, output_text_path):
+
+    loader = PDFPlumberLoader(pdf_path)
+
+    pages = loader.load_and_split()
+    text = ''
+
+    for page in pages:
+        text += page.page_content
+
+    # DEBUG
+    print(text)
+    with open(output_text_path, 'w') as f:
+        f.write(text)
+
+# End function extract_PDFPlumberLoader
+
 
 class pdf_processor(object):
 

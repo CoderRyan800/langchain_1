@@ -16,3 +16,6 @@ reportlab
 ocr-nanonets-wrapper
 PyMuPDF
 opencv-python
+unstructured
+pypdfium2
+boto3

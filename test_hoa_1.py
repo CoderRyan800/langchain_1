@@ -2,38 +2,40 @@ import json
 
 from code.pdf_processor import *
 
-# MAIN_PATH = "/home/ryanmukai/Documents/github/langchain_1/documents/"
 
-MAIN_PATH = "C:/Users/ryan2/Documents/github/langchain_1/documents/"
+PDF_INPUT_PATH = 's3://ryan2008-textract-practice-1/'
+TEXT_OUTPUT_PATH = "/home/ryanmukai/Documents/github/langchain_1/documents/"
+
+#MAIN_PATH = "C:/Users/ryan2/Documents/github/langchain_1/documents/"
 
 
 input_pdf_list = [
-        MAIN_PATH + "Bylaws.pdf",
-        MAIN_PATH + "CC&Rs.pdf",
-        MAIN_PATH + "Rules & Regs.pdf",
-        MAIN_PATH + "Rules for Election.pdf",
-        MAIN_PATH + "Rules for Voting.pdf",
-        MAIN_PATH + "CID STATEMENT Hubbard Gardens 03-21-2018.pdf",
-        MAIN_PATH + "SI-COMPLETE Hubbard Gardens 03-21-2018.pdf",
-        MAIN_PATH + "SI-COMPLETE Hubbard Gardens 03-09-2016.pdf",
-        MAIN_PATH + "Articles of Incorporation Hubbard Gardens May 19 1998.pdf",
-        MAIN_PATH + "Hubbard Gardens Search - Business Entities California Secretary of State.pdf",
-        MAIN_PATH + "Hubbard Gardens HOA policies and budget 2021.pdf"
+        PDF_INPUT_PATH + "Bylaws.pdf",
+        PDF_INPUT_PATH + "CC&Rs.pdf",
+        PDF_INPUT_PATH + "Rules & Regs.pdf",
+        PDF_INPUT_PATH + "Rules for Election.pdf",
+        PDF_INPUT_PATH + "Rules for Voting.pdf",
+        PDF_INPUT_PATH + "CID STATEMENT Hubbard Gardens 03-21-2018.pdf",
+        PDF_INPUT_PATH + "SI-COMPLETE Hubbard Gardens 03-21-2018.pdf",
+        PDF_INPUT_PATH + "SI-COMPLETE Hubbard Gardens 03-09-2016.pdf",
+        PDF_INPUT_PATH + "Articles of Incorporation Hubbard Gardens May 19 1998.pdf",
+        PDF_INPUT_PATH + "Hubbard Gardens Search - Business Entities California Secretary of State.pdf",
+        PDF_INPUT_PATH + "Hubbard Gardens HOA policies and budget 2021.pdf"
     ]
 
 output_pdf_list = [
 
-        MAIN_PATH + "Bylaws2.txt",
-        MAIN_PATH + "CC&Rs2.txt",
-        MAIN_PATH + "Rules & Regs2.txt",
-        MAIN_PATH + "Rules for Election2.txt",
-        MAIN_PATH + "Rules for Voting2.txt",
-        MAIN_PATH + "CID STATEMENT Hubbard Gardens 03-21-2018 2.txt",
-        MAIN_PATH + "SI-COMPLETE Hubbard Gardens 03-21-2018 2.txt",
-        MAIN_PATH + "SI-COMPLETE Hubbard Gardens 03-09-2016 2.txt",
-        MAIN_PATH + "Articles of Incorporation Hubbard Gardens May 19 1998 2.txt",
-        MAIN_PATH + "Hubbard Gardens Search - Business Entities California Secretary of State 2.txt",
-        MAIN_PATH + "Hubbard Gardens HOA policies and budget 2021 2.txt"
+        TEXT_OUTPUT_PATH + "Bylaws2.txt",
+        TEXT_OUTPUT_PATH + "CC&Rs2.txt",
+        TEXT_OUTPUT_PATH + "Rules & Regs2.txt",
+        TEXT_OUTPUT_PATH + "Rules for Election2.txt",
+        TEXT_OUTPUT_PATH + "Rules for Voting2.txt",
+        TEXT_OUTPUT_PATH + "CID STATEMENT Hubbard Gardens 03-21-2018 2.txt",
+        TEXT_OUTPUT_PATH + "SI-COMPLETE Hubbard Gardens 03-21-2018 2.txt",
+        TEXT_OUTPUT_PATH + "SI-COMPLETE Hubbard Gardens 03-09-2016 2.txt",
+        TEXT_OUTPUT_PATH + "Articles of Incorporation Hubbard Gardens May 19 1998 2.txt",
+        TEXT_OUTPUT_PATH + "Hubbard Gardens Search - Business Entities California Secretary of State 2.txt",
+        TEXT_OUTPUT_PATH + "Hubbard Gardens HOA policies and budget 2021 2.txt"
 
 ]
 
@@ -43,7 +45,8 @@ for index in range(N):
 
     current_input_filename = input_pdf_list[index]
     current_output_filename = output_pdf_list[index]
-    extract_UnstructuredPDFLoader(current_input_filename, current_output_filename)
+    # extract_UnstructuredPDFLoader(current_input_filename, current_output_filename)
+    extract_AmazonTextractPDFLoader(current_input_filename, current_output_filename)
 
 proc_obj = pdf_processor(pdf_filename_list=output_pdf_list,
     chat_gpt_model_choice='gpt-4',pdf_flag=False)

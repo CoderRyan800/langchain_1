@@ -7,6 +7,8 @@ from langchain.chains import RetrievalQA
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 
+from langchain.document_loaders import AmazonTextractPDFLoader
+
 import io
 import os
 from pdf2image import convert_from_path
@@ -76,6 +78,22 @@ def extract_PyPDFLoader(pdf_path, output_text_path):
 
 # End function extract_PyPDFLoader
 
+def extract_AmazonTextractPDFLoader(pdf_path, output_text_path):
+
+    loader = AmazonTextractPDFLoader(pdf_path,region_name='us-east-1')
+
+    pages = loader.load_and_split()
+    text = ''
+
+    for page in pages:
+        text += page.page_content
+
+    # DEBUG
+    print(text)
+    with open(output_text_path, 'w') as f:
+        f.write(text)
+
+# End function extract_AmazonTextractPDFLoader
 
 def extract_UnstructuredPDFLoader(pdf_path, output_text_path):
 

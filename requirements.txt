@@ -21,3 +21,4 @@ pypdfium2
 boto3
 pdfminer
 pdfminer.six
+amazon-textract-caller

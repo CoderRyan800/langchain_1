@@ -2,33 +2,38 @@ import json
 
 from code.pdf_processor import *
 
+# MAIN_PATH = "/home/ryanmukai/Documents/github/langchain_1/documents/"
+
+MAIN_PATH = "C:/Users/ryan2/Documents/github/langchain_1/documents/"
+
+
 input_pdf_list = [
-        "/home/ryanmukai/Documents/github/langchain_1/documents/Bylaws.pdf",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/CC&Rs.pdf",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/Rules & Regs.pdf",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/Rules for Election.pdf",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/Rules for Voting.pdf",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/CID STATEMENT Hubbard Gardens 03-21-2018.pdf",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/SI-COMPLETE Hubbard Gardens 03-21-2018.pdf",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/SI-COMPLETE Hubbard Gardens 03-09-2016.pdf",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/Articles of Incorporation Hubbard Gardens May 19 1998.pdf",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/Hubbard Gardens Search - Business Entities California Secretary of State.pdf",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/Hubbard Gardens HOA policies and budget 2021.pdf"
+        MAIN_PATH + "Bylaws.pdf",
+        MAIN_PATH + "CC&Rs.pdf",
+        MAIN_PATH + "Rules & Regs.pdf",
+        MAIN_PATH + "Rules for Election.pdf",
+        MAIN_PATH + "Rules for Voting.pdf",
+        MAIN_PATH + "CID STATEMENT Hubbard Gardens 03-21-2018.pdf",
+        MAIN_PATH + "SI-COMPLETE Hubbard Gardens 03-21-2018.pdf",
+        MAIN_PATH + "SI-COMPLETE Hubbard Gardens 03-09-2016.pdf",
+        MAIN_PATH + "Articles of Incorporation Hubbard Gardens May 19 1998.pdf",
+        MAIN_PATH + "Hubbard Gardens Search - Business Entities California Secretary of State.pdf",
+        MAIN_PATH + "Hubbard Gardens HOA policies and budget 2021.pdf"
     ]
 
 output_pdf_list = [
 
-        "/home/ryanmukai/Documents/github/langchain_1/documents/Bylaws2.txt",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/CC&Rs2.txt",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/Rules & Regs2.txt",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/Rules for Election2.txt",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/Rules for Voting2.txt",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/CID STATEMENT Hubbard Gardens 03-21-2018 2.txt",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/SI-COMPLETE Hubbard Gardens 03-21-2018 2.txt",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/SI-COMPLETE Hubbard Gardens 03-09-2016 2.txt",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/Articles of Incorporation Hubbard Gardens May 19 1998 2.txt",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/Hubbard Gardens Search - Business Entities California Secretary of State 2.txt",
-        "/home/ryanmukai/Documents/github/langchain_1/documents/Hubbard Gardens HOA policies and budget 2021 2.txt"
+        MAIN_PATH + "Bylaws2.txt",
+        MAIN_PATH + "CC&Rs2.txt",
+        MAIN_PATH + "Rules & Regs2.txt",
+        MAIN_PATH + "Rules for Election2.txt",
+        MAIN_PATH + "Rules for Voting2.txt",
+        MAIN_PATH + "CID STATEMENT Hubbard Gardens 03-21-2018 2.txt",
+        MAIN_PATH + "SI-COMPLETE Hubbard Gardens 03-21-2018 2.txt",
+        MAIN_PATH + "SI-COMPLETE Hubbard Gardens 03-09-2016 2.txt",
+        MAIN_PATH + "Articles of Incorporation Hubbard Gardens May 19 1998 2.txt",
+        MAIN_PATH + "Hubbard Gardens Search - Business Entities California Secretary of State 2.txt",
+        MAIN_PATH + "Hubbard Gardens HOA policies and budget 2021 2.txt"
 
 ]
 

@@ -19,3 +19,5 @@ opencv-python
 unstructured
 pypdfium2
 boto3
+pdfminer
+pdfminer.six

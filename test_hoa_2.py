@@ -1,5 +1,5 @@
 import json
-
+import re
 from code.pdf_processor import *
 
 
@@ -73,12 +73,20 @@ response_list = []
 
 fp = open('/home/ryanmukai/Documents/github/langchain_1/other/response_data.json','w')
 
-for query in question_list:
+stop_flag = False
+regex_stop = re.compile('STOP')
+
+while not stop_flag:
+    query = input("Please enter your query regarding the HOA documents: ")
+    if regex_stop.search(query) is not None:
+        break
     response = proc_obj.query_the_document(query)
     response_dict = convert_to_json_serializable(response)
     output_string = json.dumps(response_dict,indent=4)
     fp.write(output_string)
     fp.write("\n")
+    print(response_dict['answer'])
+    print("\n\n")
 
 fp.close()
 

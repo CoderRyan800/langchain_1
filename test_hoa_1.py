@@ -41,12 +41,12 @@ output_pdf_list = [
 
 N = len(input_pdf_list)
 
-for index in range(N):
+# for index in range(N):
 
-    current_input_filename = input_pdf_list[index]
-    current_output_filename = output_pdf_list[index]
-    # extract_UnstructuredPDFLoader(current_input_filename, current_output_filename)
-    extract_AmazonTextractPDFLoader(current_input_filename, current_output_filename)
+#     current_input_filename = input_pdf_list[index]
+#     current_output_filename = output_pdf_list[index]
+#     # extract_UnstructuredPDFLoader(current_input_filename, current_output_filename)
+#     extract_AmazonTextractPDFLoader(current_input_filename, current_output_filename)
 
 proc_obj = pdf_processor(pdf_filename_list=output_pdf_list,
     chat_gpt_model_choice='gpt-4',pdf_flag=False)
@@ -75,7 +75,8 @@ fp = open('/home/ryanmukai/Documents/github/langchain_1/other/response_data.json
 
 for query in question_list:
     response = proc_obj.query_the_document(query)
-    output_string = repr(response)
+    response_dict = convert_to_json_serializable(response)
+    output_string = json.dumps(response_dict,indent=4)
     fp.write(output_string)
     fp.write("\n")
 

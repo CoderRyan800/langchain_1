@@ -234,11 +234,19 @@ class pdf_processor(object):
 
         # Create a memory for conversations.
 
-        self.memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+        self.memory = ConversationBufferMemory(memory_key="chat_history",
+                                               output_key="answer",
+                                               return_messages=True)
 
         # Creat a chat object.
 
-        self.chat = ConversationalRetrievalChain.from_llm(self.llm, retriever=self.retriever, memory=self.memory)
+        self.chat = ConversationalRetrievalChain.from_llm(self.llm, 
+                                                          retriever=self.retriever, 
+                                                          memory=self.memory,
+                                                          return_source_documents=True)
+
+
+
 
     # End __init__ method
 
@@ -273,3 +281,23 @@ class pdf_processor(object):
 
 # End class declaration pdf_processor
 
+def convert_to_json_serializable(input_response):
+
+    if type(input_response) is dict:
+        new_dict = dict()
+        for current_key in input_response:
+            new_dict[current_key] = convert_to_json_serializable(input_response[current_key])
+        return new_dict
+    elif type(input_response) is list:
+        new_list = []
+        for current_item in input_response:
+            new_list.append(convert_to_json_serializable(current_item))
+        return new_list
+    else:
+        try:
+            new_item = input_response.json()
+        except:
+            new_item = input_response
+        return new_item
+
+# End convert_to_json

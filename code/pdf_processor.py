@@ -6,7 +6,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
-
+from langchain.retrievers.multi_query import MultiQueryRetriever
 from langchain.document_loaders import AmazonTextractPDFLoader
 
 import io
@@ -228,6 +228,11 @@ class pdf_processor(object):
 
         self.retriever = self.vectorstore.as_retriever()
 
+        self.query_llm = ChatOpenAI(model_name='gpt-3.5-turbo-16k',temperature=0)
+        self.retriever_from_llm = MultiQueryRetriever.from_llm(
+            retriever=self.retriever, llm=self.query_llm
+        )
+
         # Create an LLM object we can use.
 
         self.llm = ChatOpenAI(model_name=chat_gpt_model_choice, temperature=0)
@@ -241,7 +246,7 @@ class pdf_processor(object):
         # Creat a chat object.
 
         self.chat = ConversationalRetrievalChain.from_llm(self.llm, 
-                                                          retriever=self.retriever, 
+                                                          retriever=self.retriever_from_llm, 
                                                           memory=self.memory,
                                                           return_source_documents=True)
 

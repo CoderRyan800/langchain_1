@@ -8,6 +8,7 @@ from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from langchain.retrievers.multi_query import MultiQueryRetriever
 from langchain.document_loaders import AmazonTextractPDFLoader
+from langchain_experimental.tot.base import ToTChain
 
 import io
 import os
@@ -245,13 +246,15 @@ class pdf_processor(object):
 
         # Creat a chat object.
 
-        self.chat = ConversationalRetrievalChain.from_llm(self.llm, 
+        self.chat1 = ConversationalRetrievalChain.from_llm(self.llm, 
                                                           retriever=self.retriever_from_llm, 
                                                           memory=self.memory,
                                                           return_source_documents=True)
 
+        # Create a TotChain
+        self.chat = TotChain.from_llm(OpenAI())
 
-
+        self.chat.add_chain(self.chat1)
 
     # End __init__ method
 

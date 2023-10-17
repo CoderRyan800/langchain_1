@@ -9,3 +9,16 @@ chromadb
 tiktoken
 pypdf
 tqdm
+pytesseract
+pdf2image
+PyPDF2
+reportlab
+ocr-nanonets-wrapper
+PyMuPDF
+opencv-python
+unstructured
+pypdfium2
+boto3
+pdfminer
+pdfminer.six
+amazon-textract-caller

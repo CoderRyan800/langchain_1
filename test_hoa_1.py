@@ -1,6 +1,6 @@
 import json
 
-from code.pdf_processor import *
+from base_code.pdf_processor import *
 
 
 PDF_INPUT_PATH = 's3://ryan2008-textract-practice-1/'

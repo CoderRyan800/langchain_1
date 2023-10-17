@@ -1,6 +1,6 @@
 import json
 
-from code.pdf_processor import *
+from base_code.pdf_processor import *
 
 proc_obj = pdf_processor(pdf_filename_list=[
     "/home/ryanmukai/Documents/github/redesigned-octo-goggles/writing/lstm_paper.pdf",

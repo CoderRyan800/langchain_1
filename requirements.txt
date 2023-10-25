@@ -22,3 +22,4 @@ boto3
 pdfminer
 pdfminer.six
 amazon-textract-caller
+neo4j

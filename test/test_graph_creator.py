@@ -59,7 +59,8 @@ list_of_docs = [
     }
 ]
 
-output_list = create_graph_from_documents(list_of_docs)
+#output_list = create_graph_from_documents(list_of_docs)
+output_list = create_graph_from_documents(list_of_pages)
 
 with open('test_script.txt','w') as fp:
 

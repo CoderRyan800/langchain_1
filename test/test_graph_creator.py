@@ -8,7 +8,7 @@ from base_code.graph_creator import *
 
 
 PDF_INPUT_PATH = 's3://ryan2008-textract-practice-1/'
-TEXT_OUTPUT_PATH = "/home/ryanmukai/Documents/github/langchain_1/documents/"
+TEXT_OUTPUT_PATH = "/Users/ryanmukai/Documents/github/langchain_1/documents/"
 
 text_filename_list = [
 
@@ -59,7 +59,7 @@ list_of_docs = [
     }
 ]
 
-output_list = create_graph_from_documents(list_of_pages)
+output_list = create_graph_from_documents(list_of_docs)
 
 with open('test_script.txt','w') as fp:
 

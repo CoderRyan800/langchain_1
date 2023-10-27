@@ -40,10 +40,16 @@ def create_graph_from_documents(list_of_documents):
     previous_output_string_buffer = ""
 
     for current_document in list_of_documents:
-        input_dictionary = {
-            "new_document": current_document.page_content,
-            "chat_history": previous_output_string_buffer
-        }
+        if type(current_document) is not dict:
+            input_dictionary = {
+                "new_document": current_document.page_content,
+                "chat_history": previous_output_string_buffer
+            }
+        else:
+            input_dictionary = {
+                "new_document": current_document["new_document"],
+                "chat_history": previous_output_string_buffer
+            }
         current_output = working_chain.batch([input_dictionary])
         #print(current_output['text'])
         list_of_outputs.append(current_output[0])

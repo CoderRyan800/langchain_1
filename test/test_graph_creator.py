@@ -32,10 +32,16 @@ for current_text_filename in text_filename_list:
 
     loader = TextLoader(current_text_filename)
     if first_document_flag:
-        list_of_pages = loader.load_and_split()
+        loader.load_and_split()
+        raw_documents = loader.load_and_split()
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=2000)
+        list_of_pages = text_splitter.split_documents(raw_documents)
         first_document_flag = False
     else:
-        list_of_pages = list_of_pages + loader.load_and_split()
+        loader.load_and_split()
+        raw_documents = loader.load_and_split()
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=2000)
+        list_of_pages = list_of_pages + text_splitter.split_documents(raw_documents)
 
 
 list_of_docs = [

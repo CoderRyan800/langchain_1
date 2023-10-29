@@ -13,17 +13,25 @@ def create_graph_from_documents(list_of_documents):
 
     llm = OpenAI(temperature=0)
     # Notice that "chat_history" is present in the prompt template
-    template = """Please read in named entities and main ideas from the previous conversation and from
-    the new document string and return updates to the Neo4j Cypher graph.  
-    Add new entities and relationships that you find in the document to the graph.
-    Write outputs
-    in pure Cypher. Do not declare any variables already declared in other Cypher statements.
-    Do not create an
-    entity again that is already created.  Include the main relationships among named
-    entities and key concepts in the graph. CRITICAL: Please add a semicolon after each Cypher
-    statement because this will be read into neo4j using the :source command.
+    template = """You are creating a summary of input documents to be represented
+    as entities and relationships in Neo4j Cypher.  You must extract the main high-level
+    entities and their relationships from the new document and use them
+    to re-write the existing graph so as
+    to capture the most important entities and relationships in the existing graph
+    and to introduce the main entities and relationships from the new document to
+    the graph.  Output is a re-written graph that 
+    must be written in pure Cypher because it will be read into
+    Neo4j using automated tools.  For this reason, every Cypher state must end in
+    a semicolon.  Any notes or comments explaining the graph must be proper
+    Cypher comments to avoid confusing the Neo4j database system when the Cypher
+    statements are read in.  Do not repeat variables and do not repeat entities
+    that already exist.  You are not augmenting but actually re-writing the graph
+    so please focus only on major entities and core relationships.  If the graph
+    is blank, then you must write a new graph based on the document you have.  Be
+    sure that your comments explain the entities and relationships so that you can
+    read them and use them to guide future updates.
 
-    Previous conversation:
+    Existing graph:
     {chat_history}
 
     New document: {new_document}
@@ -82,7 +90,9 @@ def create_graph_from_documents(list_of_documents):
 
             #print(current_output['text'])
             list_of_outputs.append(current_output[0])
-            previous_output_string_buffer = previous_output_string_buffer + "\n%s\n" % (current_output[0],)
+            #previous_output_string_buffer = previous_output_string_buffer + "\n%s\n" % (current_output[0],)
+            # Here, we are completely re-writing the graph rather than augmenting it.
+            previous_output_string_buffer = current_output[0]
         # End loop over documents
     # End with block for cb
     return list_of_outputs

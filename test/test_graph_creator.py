@@ -73,4 +73,4 @@ with open('test_script.txt','w') as fp:
     for current_item in output_list:
         fp.write("%s\n" % (current_item,))
 
-
+scrub_graph_output('test_script.txt','revised_script.txt')

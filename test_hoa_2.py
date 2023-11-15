@@ -51,7 +51,7 @@ N = len(input_pdf_list)
 # gpt-3.5-turbo-16k
 
 proc_obj = pdf_processor(pdf_filename_list=output_pdf_list,
-    chat_gpt_model_choice='gpt-4',pdf_flag=False)
+    chat_gpt_model_choice='gpt-3.5-turbo-16k',pdf_flag=False)
 
 question_list = [
     "What is the name of the homeowner's association?",

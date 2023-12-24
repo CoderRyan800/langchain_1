@@ -1,0 +1,225 @@
+// Create Article Nodes with Summaries and Page Ranges
+CREATE (ArticleI:Article {title: 'Definitions', summary: 'Defines key terms used in the document, essential for understanding the CC&Rs', pageRange: 'I-1'})
+CREATE (ArticleII:Article {title: 'Division, Maintenance, and Insurance of Property', summary: 'Details the responsibilities for maintenance and insurance of individual units and common areas', pageRange: 'II-1 to II-5'})
+CREATE (ArticleIII:Article {title: 'Owners General Use Restrictions', summary: 'Lays out restrictions and guidelines on the use of individual units and common areas by owners', pageRange: 'III-1 to III-3'})
+CREATE (ArticleIV:Article {title: 'Association Membership and Voting Rights', summary: 'Describes membership classes within the association and outlines voting rights and procedures', pageRange: 'IV-1 to IV-2'})
+CREATE (ArticleV:Article {title: 'Duties and Powers of the Association', summary: 'Enumerates the responsibilities and powers of the homeowners association', pageRange: 'V-1 to V-5'})
+CREATE (ArticleVI:Article {title: 'Covenant for Assessment', summary: 'Covers assessment types, duties, and procedures for handling delinquencies and non-payment', pageRange: 'VI-1 to VI-4'})
+CREATE (ArticleVII:Article {title: 'Architectural Control', summary: 'Outlines procedures and standards for any architectural changes proposed by homeowners', pageRange: 'VII-1 to VII-2'})
+CREATE (ArticleVIII:Article {title: 'Mortgagee Protection', summary: 'Provides protections for mortgagees and details the process in case of property damage or loss', pageRange: 'VIII-1 to VIII-6'})
+CREATE (ArticleIX:Article {title: 'Destruction of Improvements', summary: 'Details the process for restoration or sale of property in the event of its destruction', pageRange: 'IX-1'})
+CREATE (ArticleX:Article {title: 'Condemnation', summary: 'Describes procedures in case of condemnation and how awards are to be distributed', pageRange: 'X-1'})
+CREATE (ArticleXI:Article {title: 'Covenant Against Partition and Restriction on Severability of Condominium Component Interest', summary: 'Details rules against partition and restrictions on severability of interests in the property', pageRange: 'XI-1 to XI-2'})
+CREATE (ArticleXII:Article {title: 'Easements', summary: 'Describes various easements, including rights and restrictions associated with them', pageRange: 'XII-1 to XII-2'})
+CREATE (ArticleXIII:Article {title: 'Additional Property', summary: 'Covers provisions for annexation and deannexation of additional property to the HOA', pageRange: 'XIII-1 to XIII-2'})
+CREATE (ArticleXIV:Article {title: 'Special Provisions Relating to Enforcement of Declarant\'s Obligation to Complete Common Area Improvements', summary: 'Special provisions focusing on the declarant’s obligations regarding common area improvements', pageRange: 'XIV-1'})
+CREATE (ArticleXV:Article {title: 'Amendment', summary: 'Outlines the procedures and requirements necessary for making amendments to the CC&Rs', pageRange: 'XV-1'})
+CREATE (ArticleXVI:Article {title: 'Miscellaneous Provisions', summary: 'Includes various legal provisions, like dispute resolution, disclosures, and the declaration\'s term', pageRange: 'XVI-1 to XVI-3'})
+
+// Article II Subsections with Summaries and Page Numbers
+CREATE (Units:Section {title: '2.01 Units', summary: 'Describes the composition and components of each unit', pageNumber: 'II-1'})
+CREATE (CommonAreas:Section {title: '2.02 Common Area(s)', summary: 'Defines common areas and the interest of each owner in them', pageNumber: 'II-1'})
+CREATE (ExclusiveUseCommonAreas:Section {title: '2.03 Exclusive Use Common Area(s)', summary: 'Details the areas of common property designated for exclusive use', pageNumber: 'II-1'})
+CREATE (RepairMaintenanceOwner:Section {title: '2.04 Repair and Maintenance of the Property by Owner', summary: 'Outlines the responsibilities of owners for maintenance and repair within their units and exclusive use areas', pageNumber: 'II-2 to II-3'})
+CREATE (RepairMaintenanceAssoc:Section {title: '2.05 Repair and Maintenance of the Property by Association', summary: 'Specifies the Association’s responsibilities in maintaining and repairing common areas', pageNumber: 'II-3 to II-4'})
+CREATE (AssocInsurance:Section {title: '2.06 Association Insurance', summary: 'Details the types of insurance policies the Association must maintain', pageNumber: 'II-4 to II-5'})
+CREATE (OwnerInsurance:Section {title: '2.07 Owner Insurance', summary: 'Advises owners on the types of insurance they should consider for their own protection', pageNumber: 'II-5'})
+
+// ... Continue for other articles and their subsections
+
+// Create Relationships for Article II Subsections
+CREATE (ArticleII)-[:CONTAINS]->(Units)
+CREATE (ArticleII)-[:CONTAINS]->(CommonAreas)
+CREATE (ArticleII)-[:CONTAINS]->(ExclusiveUseCommonAreas)
+CREATE (ArticleII)-[:CONTAINS]->(RepairMaintenanceOwner)
+CREATE (ArticleII)-[:CONTAINS]->(RepairMaintenanceAssoc)
+CREATE (ArticleII)-[:CONTAINS]->(AssocInsurance)
+CREATE (ArticleII)-[:CONTAINS]->(OwnerInsurance)
+
+// ... Continue creating relationships for other articles and their respective subsections
+
+// Note: This pattern will be replicated for all articles and their respective subsections, establishing a detailed and interconnected graph structure.
+
+// Create Subsection Nodes for Article I with Summaries and Page Numbers
+CREATE (Def:Section {title: 'Definitions', summary: 'Detailed definitions of key terms and phrases used in the CC&Rs.', pageNumber: 'I-1'})
+CREATE (ArticleI)-[:CONTAINS]->(Def)
+
+// Subsections for Article II - Already defined in previous messages
+
+// Create Subsection Nodes for Article III with Summaries and Page Numbers
+CREATE (UnitUse:Section {title: '3.01 Unit Use', summary: 'Outlines the permissible uses of individual units within the property.', pageNumber: 'III-1'})
+CREATE (CommonAreaUse:Section {title: '3.02 Common Area Use', summary: 'Sets guidelines for the use of common areas by the owners and residents.', pageNumber: 'III-1'})
+CREATE (Nuisances:Section {title: '3.03 Nuisances', summary: 'Details what constitutes a nuisance and how such issues are handled.', pageNumber: 'III-2'})
+CREATE (DebrisTrashRefuse:Section {title: '3.04 Debris, Trash and Refuse', summary: 'Regulations regarding cleanliness and waste management in the property.', pageNumber: 'III-2'})
+CREATE (Signs:Section {title: '3.05 Signs', summary: 'Rules governing the display of signs and advertisements within the property.', pageNumber: 'III-2'})
+CREATE (UseAlterationInsurance:Section {title: '3.06 Use/Alteration Affecting Insurance Rates', summary: 'Provisions regarding changes that may affect insurance rates.', pageNumber: 'III-3'})
+CREATE (ParkingRegulations:Section {title: '3.07 Parking / Vehicle Code Regulations', summary: 'Describes parking rules and vehicle regulations applicable within the property.', pageNumber: 'III-3'})
+CREATE (AnimalRegulations:Section {title: '3.08 Animal Regulations', summary: 'Guidelines and limitations on keeping animals within the property.', pageNumber: 'III-3'})
+CREATE (ArticleIII)-[:CONTAINS]->(UnitUse)
+CREATE (ArticleIII)-[:CONTAINS]->(CommonAreaUse)
+CREATE (ArticleIII)-[:CONTAINS]->(Nuisances)
+CREATE (ArticleIII)-[:CONTAINS]->(DebrisTrashRefuse)
+CREATE (ArticleIII)-[:CONTAINS]->(Signs)
+CREATE (ArticleIII)-[:CONTAINS]->(UseAlterationInsurance)
+CREATE (ArticleIII)-[:CONTAINS]->(ParkingRegulations)
+CREATE (ArticleIII)-[:CONTAINS]->(AnimalRegulations)
+
+// ... Similar pattern will be followed for remaining articles and their subsections
+
+// Note: Due to the extensive nature of the document, the complete creation of all subsection nodes and relationships for each article is a large task and would result in a very long and detailed script. In practice, this would be done for the entire document to create a comprehensive graph representation.
+
+// Create Subsection Nodes for Article IV with Summaries and Page Numbers
+CREATE (Membership:Section {title: '4.01 Membership', summary: 'Defines automatic membership of Unit Owners in the Association.', pageNumber: 'IV-1'})
+CREATE (MembershipClasses:Section {title: '4.02 Membership Classes', summary: 'Details the classification and rights of different membership classes.', pageNumber: 'IV-1'})
+CREATE (VotingRights:Section {title: '4.03 Voting Rights and Requirements', summary: 'Outlines the voting rights of members and the requirements for exercising these rights.', pageNumber: 'IV-1'})
+CREATE (TransferMembership:Section {title: '4.04 Transfer of Membership', summary: 'Describes the conditions under which membership can be transferred.', pageNumber: 'IV-2'})
+CREATE (ArticleIV)-[:CONTAINS]->(Membership)
+CREATE (ArticleIV)-[:CONTAINS]->(MembershipClasses)
+CREATE (ArticleIV)-[:CONTAINS]->(VotingRights)
+CREATE (ArticleIV)-[:CONTAINS]->(TransferMembership)
+
+// Subsection Nodes for Article V
+// ... (Subsections for Article V would be created here)
+
+// Subsection Nodes for Article VI
+// ... (Subsections for Article VI would be created here)
+
+// ... This pattern would be continued for each article's subsections
+
+// Note: The full completion of this task would involve iterating this process for each article in the document, creating nodes and relationships for every subsection.
+
+// Create Subsection Nodes for Article V with Summaries and Page Numbers
+CREATE (CommencementDuties:Section {title: '5.01 Commencement of Duties', summary: 'Outlines when the Association’s duties begin.', pageNumber: 'V-1'})
+CREATE (AssocDutiesPowers:Section {title: '5.02 Specific Association Duties and Powers', summary: 'Details the specific duties and powers granted to the Association.', pageNumber: 'V-1'})
+CREATE (BoardPowersLimitations:Section {title: '5.03 Board Powers and Limitations', summary: 'Defines the powers and limitations of the Board of Directors.', pageNumber: 'V-1'})
+CREATE (BudgetFinancialStatements:Section {title: '5.04 Budget, Financial Statements, and Governing Documents', summary: 'Covers the Association’s responsibilities regarding budgeting, financial statements, and maintaining governing documents.', pageNumber: 'V-3'})
+CREATE (PenaltiesNonCompliance:Section {title: '5.05 Penalties for Non-Compliance', summary: 'Describes penalties for non-compliance with the Association’s rules and regulations.', pageNumber: 'V-4'})
+CREATE (RightOfEntry:Section {title: '5.06 Right of Entry', summary: 'Details the conditions under which the Association or its agents may enter a unit.', pageNumber: 'V-5'})
+CREATE (UnsegRealPropertyTaxes:Section {title: '5.07 Unsegregated Real Property Taxes', summary: 'Discusses the handling of unsegregated real property taxes related to the Association.', pageNumber: 'V-5'})
+CREATE (ArticleV)-[:CONTAINS]->(CommencementDuties)
+CREATE (ArticleV)-[:CONTAINS]->(AssocDutiesPowers)
+CREATE (ArticleV)-[:CONTAINS]->(BoardPowersLimitations)
+CREATE (ArticleV)-[:CONTAINS]->(BudgetFinancialStatements)
+CREATE (ArticleV)-[:CONTAINS]->(PenaltiesNonCompliance)
+CREATE (ArticleV)-[:CONTAINS]->(RightOfEntry)
+CREATE (ArticleV)-[:CONTAINS]->(UnsegRealPropertyTaxes)
+
+// Note: These nodes provide a detailed breakdown of Article V, representing each major subsection and their respective contents for easy navigation and understanding in the Neo4j graph database.
+
+// Create Subsection Nodes for Article VI with Summaries and Page Numbers
+CREATE (Assessments:Section {title: '6.01 Assessments', summary: 'Defines various types of assessments levied by the Association and their purposes.', pageNumber: 'VI-1'})
+CREATE (AssessmentsCommencement:Section {title: '6.02 Commencement; Due Dates of Assessments', summary: 'Details when assessments commence and their due dates.', pageNumber: 'VI-1'})
+CREATE (AssessmentRate:Section {title: '6.03 Assessment Rate', summary: 'Discusses how the assessment rate is determined and applied.', pageNumber: 'VI-1'})
+CREATE (BoardAssessmentDuties:Section {title: '6.04 Assessment Duties of the Board of Directors', summary: 'Outlines the responsibilities of the Board in relation to the levying and administration of assessments.', pageNumber: 'VI-2'})
+CREATE (NonpaymentEffects:Section {title: '6.05 Effect of Nonpayment of Assessments: Delinquency and Remedies of the Association', summary: 'Describes the consequences of nonpayment of assessments and the actions the Association can take.', pageNumber: 'VI-2 to VI-3'})
+CREATE (NonuseAbandonment:Section {title: '6.06 Nonuse and Abandonment', summary: 'Addresses how nonuse or abandonment of a unit affects assessment responsibilities.', pageNumber: 'VI-3'})
+CREATE (WaiverExemptions:Section {title: '6.07 Waiver of Exemptions', summary: 'Details any waivers regarding exemptions from assessments.', pageNumber: 'VI-3'})
+CREATE (CapitalizationAssociation:Section {title: '6.08 Capitalization of the Association', summary: 'Covers the financial capitalization requirements of the Association.', pageNumber: 'VI-4'})
+CREATE (ArticleVI)-[:CONTAINS]->(Assessments)
+CREATE (ArticleVI)-[:CONTAINS]->(AssessmentsCommencement)
+CREATE (ArticleVI)-[:CONTAINS]->(AssessmentRate)
+CREATE (ArticleVI)-[:CONTAINS]->(BoardAssessmentDuties)
+CREATE (ArticleVI)-[:CONTAINS]->(NonpaymentEffects)
+CREATE (ArticleVI)-[:CONTAINS]->(NonuseAbandonment)
+CREATE (ArticleVI)-[:CONTAINS]->(WaiverExemptions)
+CREATE (ArticleVI)-[:CONTAINS]->(CapitalizationAssociation)
+
+// Note: These nodes comprehensively represent the content of Article VI, enabling clear understanding and navigation within the Neo4j graph database.
+
+// Create Subsection Nodes for Article VII with Summaries and Page Numbers
+CREATE (ApprovalCommittee:Section {title: '7.01 Approval by the Committee', summary: 'Describes the requirement for architectural changes to be approved by the Architectural Committee.', pageNumber: 'VII-1'})
+CREATE (CommitteeProcedures:Section {title: '7.02 Certain Procedures for the Committee', summary: 'Outlines specific procedures that the Architectural Committee must follow.', pageNumber: 'VII-1'})
+CREATE (ReviewStandards:Section {title: '7.03 Review Standards', summary: 'Details the standards used by the Committee to review and approve submissions.', pageNumber: 'VII-2'})
+CREATE (AppealProcess:Section {title: '7.04 Appeal', summary: 'Provides a process for appealing decisions made by the Architectural Committee.', pageNumber: 'VII-2'})
+CREATE (CommitteeHearings:Section {title: '7.05 Architectural Committee Hearings', summary: 'Outlines the procedures for hearings conducted by the Architectural Committee.', pageNumber: 'VII-2'})
+CREATE (ArticleVII)-[:CONTAINS]->(ApprovalCommittee)
+CREATE (ArticleVII)-[:CONTAINS]->(CommitteeProcedures)
+CREATE (ArticleVII)-[:CONTAINS]->(ReviewStandards)
+CREATE (ArticleVII)-[:CONTAINS]->(AppealProcess)
+CREATE (ArticleVII)-[:CONTAINS]->(CommitteeHearings)
+
+// Note: These nodes provide a detailed breakdown of Article VII, representing each major subsection and their respective contents for easy navigation and understanding in the Neo4j graph database.
+
+// Create Subsection Nodes for Article VIII with Summaries and Page Numbers
+CREATE (SubordLienForeclosure:Section {title: '8.01 Subordination of Lien and Foreclosure', summary: 'Details how the Association’s lien is subordinated to a first mortgage and the foreclosure process.', pageNumber: 'VIII-1'})
+CREATE (MortgageesNotCureBreaches:Section {title: '8.02 Mortgagees Are Not Required to Cure Certain Breaches', summary: 'Specifies conditions where mortgagees are not obligated to cure breaches by homeowners.', pageNumber: 'VIII-1'})
+CREATE (BreachEffect:Section {title: '8.03 Effect of Breach of Declaration', summary: 'Explains the consequences of breaching the CC&Rs.', pageNumber: 'VIII-2'})
+CREATE (RightFirstRefusal:Section {title: '8.04 Exemption from Right of First Refusal', summary: 'Describes exemptions to the right of first refusal held by the Association.', pageNumber: 'VIII-2'})
+CREATE (ChangeRestrictions:Section {title: '8.05 Restrictions on Certain Changes', summary: 'Outlines restrictions on certain changes to the CC&Rs.', pageNumber: 'VIII-2'})
+CREATE (InspectionBooksRecords:Section {title: '8.06 Inspection of Association Books and Records', summary: 'Gives mortgagees the right to inspect the Association’s books and records.', pageNumber: 'VIII-4'})
+CREATE (CondemnAwardsInsurance:Section {title: '8.07 Condemnation Awards and Insurance Proceeds', summary: 'Covers the handling of condemnation awards and insurance proceeds.', pageNumber: 'VIII-4'})
+CREATE (MortgageeMeetingRights:Section {title: '8.08 Mortgagee\'s Right to Attend Meetings', summary: 'Affirms the right of mortgagees to attend Association meetings.', pageNumber: 'VIII-4'})
+CREATE (MortgageePayments:Section {title: '8.09 Payments by Mortgagees', summary: 'Details the conditions under which mortgagees are required to make payments.', pageNumber: 'VIII-5'})
+CREATE (LossPayableEndorsement:Section {title: '8.10 Loss Payable Endorsement', summary: 'Discusses the loss payable endorsement related to insurance.', pageNumber: 'VIII-5'})
+CREATE (NoticesMortgagees:Section {title: '8.11 Notices to Mortgagees', summary: 'Specifies the notification requirements to mortgagees.', pageNumber: 'VIII-5'})
+CREATE (GovtFinancingPrograms:Section {title: '8.12 Governmental Financing Programs', summary: 'Details the Association’s involvement in governmental financing programs.', pageNumber: 'VIII-6'})
+CREATE (ArticleVIII)-[:CONTAINS]->(SubordLienForeclosure)
+CREATE (ArticleVIII)-[:CONTAINS]->(MortgageesNotCureBreaches)
+CREATE (ArticleVIII)-[:CONTAINS]->(BreachEffect)
+CREATE (ArticleVIII)-[:CONTAINS]->(RightFirstRefusal)
+CREATE (ArticleVIII)-[:CONTAINS]->(ChangeRestrictions)
+CREATE (ArticleVIII)-[:CONTAINS]->(InspectionBooksRecords)
+CREATE (ArticleVIII)-[:CONTAINS]->(CondemnAwardsInsurance)
+CREATE (ArticleVIII)-[:CONTAINS]->(MortgageeMeetingRights)
+CREATE (ArticleVIII)-[:CONTAINS]->(MortgageePayments)
+CREATE (ArticleVIII)-[:CONTAINS]->(LossPayableEndorsement)
+CREATE (ArticleVIII)-[:CONTAINS]->(NoticesMortgagees)
+CREATE (ArticleVIII)-[:CONTAINS]->(GovtFinancingPrograms)
+
+// Note: These nodes provide a comprehensive representation of Article VIII, each major subsection and their respective contents for clarity and ease of understanding in the Neo4j graph database.
+
+// Create Subsection Nodes for Article IX with Summaries and Page Numbers
+CREATE (RestorationProperty:Section {title: '9.01 Restoration of the Property', summary: 'Outlines procedures and responsibilities for restoring the property in case of damage or destruction.', pageNumber: 'IX-1'})
+CREATE (SalePropertyPartition:Section {title: '9.02 Sale of Property and Right to Partition', summary: 'Details the conditions and procedures for the sale of property and rights related to partition.', pageNumber: 'IX-1'})
+CREATE (NoticeOwnersMortgagees:Section {title: '9.03 Notice to Owners and Listed Mortgagees', summary: 'Specifies the requirements for notifying owners and mortgagees in the event of property destruction.', pageNumber: 'IX-1'})
+CREATE (ArticleIX)-[:CONTAINS]->(RestorationProperty)
+CREATE (ArticleIX)-[:CONTAINS]->(SalePropertyPartition)
+CREATE (ArticleIX)-[:CONTAINS]->(NoticeOwnersMortgagees)
+
+// Note: These nodes provide a detailed breakdown of Article IX, representing each major subsection and their respective contents for easy navigation and understanding in the Neo4j graph database.
+
+// Create Subsection Nodes for Article X with Summaries and Page Numbers
+CREATE (BoardRepresentationCondemnation:Section {title: '10.01 Representation by Board in Condemnation Proceeding', summary: 'Details the role of the Board of Directors in representing the Association in condemnation proceedings.', pageNumber: 'X-1'})
+CREATE (DistributionAward:Section {title: '10.02 Distribution of Award', summary: 'Specifies how awards from condemnation proceedings are to be distributed among the members of the Association.', pageNumber: 'X-1'})
+CREATE (ArticleX)-[:CONTAINS]->(BoardRepresentationCondemnation)
+CREATE (ArticleX)-[:CONTAINS]->(DistributionAward)
+
+// Note: These nodes provide a detailed breakdown of Article X, representing each major subsection and their respective contents for easy navigation and understanding in the Neo4j graph database.
+
+// Create Subsection Nodes for Article XI with Summaries and Page Numbers
+CREATE (NoPartition:Section {title: '11.01 No Partition; Exceptions; Power of Attorney', summary: 'Details the restrictions on partitioning the property and exceptions to these rules.', pageNumber: 'XI-1'})
+CREATE (ProceedsPartitionSale:Section {title: '11.02 Proceeds of Partition Sale', summary: 'Specifies how proceeds from any partition sale are to be handled and distributed.', pageNumber: 'XI-1'})
+CREATE (NoSeparateConveyance:Section {title: '11.03 No Separate Conveyance of Condominium Components', summary: 'Outlines rules against the separate conveyance of individual condominium components.', pageNumber: 'XI-2'})
+CREATE (ArticleXI)-[:CONTAINS]->(NoPartition)
+CREATE (ArticleXI)-[:CONTAINS]->(ProceedsPartitionSale)
+CREATE (ArticleXI)-[:CONTAINS]->(NoSeparateConveyance)
+
+// Note: These nodes provide a detailed breakdown of Article XI, representing each major subsection and their respective contents for easy navigation and understanding in the Neo4j graph database.
+
+// Create Subsection Nodes for Article XII with Summaries and Page Numbers
+CREATE (RightsEasementsDeclarant:Section {title: '12.01 Certain Rights and Easements Reserved to Declarant', summary: 'Specifies certain rights and easements reserved specifically for the Declarant.', pageNumber: 'XII-1'})
+CREATE (EasementsOwners:Section {title: '12.02 Certain Easements for Owners', summary: 'Outlines easements granted to owners for access, use, and enjoyment of the property.', pageNumber: 'XII-1'})
+CREATE (EasementsAssociation:Section {title: '12.03 Certain Easements for Association', summary: 'Describes easements that are specifically designated for use by the Association.', pageNumber: 'XII-1'})
+CREATE (Encroachment:Section {title: '12.04 Encroachment', summary: 'Addresses issues related to encroachment of units or common areas onto adjacent property.', pageNumber: 'XII-1'})
+CREATE (CreationEasements:Section {title: '12.05 Creation of Easements', summary: 'Details the process and conditions for creating new easements within the property.', pageNumber: 'XII-2'})
+CREATE (UtilityEasements:Section {title: '12.06 Utility Easements Granted by the Association', summary: 'Covers utility easements that the Association may grant for service providers.', pageNumber: 'XII-2'})
+CREATE (ArticleXII)-[:CONTAINS]->(RightsEasementsDeclarant)
+CREATE (ArticleXII)-[:CONTAINS]->(EasementsOwners)
+CREATE (ArticleXII)-[:CONTAINS]->(EasementsAssociation)
+CREATE (ArticleXII)-[:CONTAINS]->(Encroachment)
+CREATE (ArticleXII)-[:CONTAINS]->(CreationEasements)
+CREATE (ArticleXII)-[:CONTAINS]->(UtilityEasements)
+
+// Note: These nodes provide a comprehensive representation of Article XII, each major subsection and their respective contents for clarity and ease of understanding in the Neo4j graph database.
+
+
+
+
+
+
+
+
+
+
+
+

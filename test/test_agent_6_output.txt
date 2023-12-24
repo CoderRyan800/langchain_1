@@ -1,0 +1,37 @@
+
+
+[1m> Entering new AgentExecutor chain...[0m
+[32;1m[1;3mThought: Do I need to use a tool? No
+AI: Nice to meet you, Ryan. The first President of the United States of America was George Washington. He served two terms from 1789 to 1797.[0m
+
+[1m> Finished chain.[0m
+
+
+[1m> Entering new AgentExecutor chain...[0m
+[32;1m[1;3mThought: Do I need to use a tool? Yes
+Action: Search
+Action Input: "Israel war news 23 December 2023"[0m
+Observation: [36;1m[1;3mAn armed conflict between Israel and Hamas-led Palestinian militant groups has been taking place chiefly in and around the Gaza Strip since 7 October 2023, with clashes also taking place in the West Bank and Israel–Lebanon border. On that day, militant groups launched a surprise attack on southern Israel from the Gaza Strip, marking the start of the most significant military escalation in the region since the Yom Kippur War in 1973. After clearing Hamas militants, the Israeli military retaliated by conducting an extensive aerial bombardment campaign on Gazan targets, followed by a large-scale ground invasion of Gaza. The current hostilities constitute the fifth war of the Gaza–Israel conflict, which is part of the broader Israeli–Palestinian conflict. Around 1.9 million Palestinians, more than 85% of Gaza's population, and around 500,000 Israelis have been internally displaced.The war began when Hamas-led Palestinian militant groups targeted Israel with a barrage of rockets, while around 3,000 militants breached the Gaza–Israel barrier and attacked Israel resulting in death of 695 Israeli civilians, 373 soldiers and 71 foreigners, giving a total of 1,139.
+The total includes an unknown number of deaths from friendly fire.
+Hamas stated that its attack was in response to the continued Israeli occupation of the Palestinian territories, the blockade of the Gaza Strip, the expansion of illegal Israeli settlements, rising Israeli settler violence and recent escalations.
+Also an estimated 240 Israeli soldiers, civilians and foreigners were taken to the Gaza Strip as captives or hostages, with the stated goal of forcing Israel to release Palestinian prisoners.Over the first six days, Israel dropped over 6,000 bombs on targets in Gaza, causing widespread destruction and at thousands of civilian deaths. Israel also imposed a total blockade of the Gaza Strip, leading to accusations that Israel was using starvation as a weapon and forcing Gazans to drink contaminated, salty water. Israel then launched a large-scale ground invasion of Gaza with the stated goal of destroying Hamas and controlling Gaza afterwards.As of 22 December 2023, more than 20,000 Palestinians, including over 8,000 children, 6200 women and 61 journalists have been killed. It is estimated that thousands more bodies were buried under the rubble.
+Widespread civilian deaths have led to both Israel and Hamas being accused of war crimes. Israel ordered Gazans to evacuate from northern to southern Gaza, but also bombed locations to which it told Palestinians to evacuate. It was widely reported that there was "no safe place in Gaza". The war has led to a severe humanitarian crisis in Gaza due to the cut off of water, electricity and fuel by Israel as part of the announced blockade of the area. The health system is in a state of partial collapse, most hospitals are out of service, and there are acute shortages of drinking water, food, fuel and medical supplies. Israel has also conducted mass detentions, with thousands of Palestinians detained or disappeared in Israel and the occupied Palestinian territories.Throughout the duration of the war, there have been widespread global protests that primarily call for a ceasefire. The United States has sided with Israel in rejecting calls for a ceasefire, vetoing multiple UN Security Council resolutions calling for a humanitarian ceasefire to send aid to Gaza, saying that they believed that a ceasefire was in Hamas' best interest, although a humanitarian pause was approved on 15 November with the US abstaining. During a seven-day truce, 105 Israeli hostages were exchanged for 240 Palestinian prisoners. The war still continues with United States military and diplomatic support which has been condemned by various human rights groups.[0m
+Thought:[32;1m[1;3mDo I need to use a tool? No
+AI: As of 23 December 2023, Israel is in conflict with Hamas-led Palestinian militant groups, primarily in and around the Gaza Strip, with clashes also occurring in the West Bank and along the Israel–Lebanon border. This conflict began on 7 October 2023 when these militant groups launched a surprise attack on southern Israel from the Gaza Strip. This marked the start of the most significant military escalation in the region since the Yom Kippur War in 1973. 
+
+The conflict escalated when the Israeli military retaliated with an extensive aerial bombardment campaign on Gazan targets, followed by a large-scale ground invasion of Gaza. This is the fifth war of the Gaza–Israel conflict, which is part of the broader Israeli–Palestinian conflict. 
+
+The war began when Hamas-led Palestinian militant groups targeted Israel with a barrage of rockets, while around 3,000 militants breached the Gaza–Israel barrier and attacked Israel. Hamas stated that its attack was in response to the continued Israeli occupation of the Palestinian territories, the blockade of the Gaza Strip, the expansion of illegal Israeli settlements, rising Israeli settler violence, and recent escalations.
+
+The conflict has resulted in a significant number of casualties and displaced persons on both sides, and has led to a severe humanitarian crisis in Gaza due to the cut off of water, electricity, and fuel by Israel as part of the announced blockade of the area. The health system is in a state of partial collapse, most hospitals are out of service, and there are acute shortages of drinking water, food, fuel, and medical supplies. 
+
+Throughout the duration of the war, there have been widespread global protests primarily calling for a ceasefire. The United States has sided with Israel in rejecting calls for a ceasefire, vetoing multiple UN Security Council resolutions calling for a humanitarian ceasefire to send aid to Gaza. The war continues with United States military and diplomatic support, which has been condemned by various human rights groups.[0m
+
+[1m> Finished chain.[0m
+
+
+[1m> Entering new AgentExecutor chain...[0m
+[32;1m[1;3mThought: Do I need to use a tool? No
+AI: Your name is Ryan.[0m
+
+[1m> Finished chain.[0m

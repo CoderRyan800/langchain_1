@@ -8,6 +8,7 @@ from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from langchain.retrievers.multi_query import MultiQueryRetriever
 from langchain.document_loaders import AmazonTextractPDFLoader
+from langchain.text_splitter import CharacterTextSplitter, RecursiveCharacterTextSplitter
 
 import io
 import os
@@ -195,28 +196,24 @@ class pdf_processor(object):
 
         # Begin by loading the PDF file and splitting it into pages.
         # Do only if pdf_flag is true.
+        first_document_flag = True
 
-        if pdf_flag:
 
-            first_document_flag = True
-            for current_pdf_filename in pdf_filename_list:
+        # End if logic
+
+        for current_pdf_filename in pdf_filename_list:
+            if pdf_flag:
                 loader = PyPDFLoader(current_pdf_filename)
-                if first_document_flag:
-                    self.pages = loader.load_and_split()
-                    first_document_flag = False
-                else:
-                    self.pages = self.pages + loader.load_and_split()
-        else:
-
-            first_document_flag = True
-            for current_pdf_filename in pdf_filename_list:
-
+            else:
                 loader = TextLoader(current_pdf_filename)
-                if first_document_flag:
-                    self.pages = loader.load_and_split()
-                    first_document_flag = False
-                else:
-                    self.pages = self.pages + loader.load_and_split()
+            raw_documents = loader.load_and_split()
+            text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=2000)
+            documents = text_splitter.split_documents(raw_documents)
+            if first_document_flag:
+                self.pages = documents
+                first_document_flag = False
+            else:
+                self.pages = self.pages + documents
 
         # Next, we must load these pages into a vector store to allow processing.
         # Note we are using OpenAIembeddings since these translate human language into vectors

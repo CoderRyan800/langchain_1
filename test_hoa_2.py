@@ -4,7 +4,7 @@ from base_code.pdf_processor import *
 
 
 PDF_INPUT_PATH = 's3://ryan2008-textract-practice-1/'
-TEXT_OUTPUT_PATH = "/home/ryanmukai/Documents/github/langchain_1/documents/"
+TEXT_OUTPUT_PATH = "/Users/ryanmukai/Documents/github/langchain_1/documents/"
 
 #MAIN_PATH = "C:/Users/ryan2/Documents/github/langchain_1/documents/"
 
@@ -41,12 +41,14 @@ output_pdf_list = [
 
 N = len(input_pdf_list)
 
-# for index in range(N):
+#for index in range(N):
+#
+#    current_input_filename = input_pdf_list[index]
+#    current_output_filename = output_pdf_list[index]
+#    # extract_UnstructuredPDFLoader(current_input_filename, current_output_filename)
+#    extract_AmazonTextractPDFLoader(current_input_filename, current_output_filename)
 
-#     current_input_filename = input_pdf_list[index]
-#     current_output_filename = output_pdf_list[index]
-#     # extract_UnstructuredPDFLoader(current_input_filename, current_output_filename)
-#     extract_AmazonTextractPDFLoader(current_input_filename, current_output_filename)
+# gpt-3.5-turbo-16k
 
 proc_obj = pdf_processor(pdf_filename_list=output_pdf_list,
     chat_gpt_model_choice='gpt-3.5-turbo-16k',pdf_flag=False)
@@ -71,7 +73,7 @@ question_list = [
 
 response_list = []
 
-fp = open('/home/ryanmukai/Documents/github/langchain_1/other/response_data.json','w')
+fp = open('/Users/ryanmukai/Documents/github/langchain_1/other/response_data.json','w')
 
 stop_flag = False
 regex_stop = re.compile('STOP')
@@ -92,7 +94,7 @@ fp.close()
 
 json_string = json.dumps(json.loads(proc_obj.memory.json()),indent=4)
 
-fp = open('/home/ryanmukai/Documents/github/langchain_1/other/memory.json','w')
+fp = open('/Users/ryanmukai/Documents/github/langchain_1/other/memory.json','w')
 
 fp.write(json_string)
 

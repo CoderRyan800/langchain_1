@@ -41,7 +41,7 @@ agent_executor.invoke({"input":question})["output"]
 question = "As of today, 23 December 2023, with whom is Israel at war, and how did that war start and when?"
 agent_executor.invoke({"input":question})["output"]
 
-question = "What is my name?"
+question = "What is my name, and what have we discussed?"
 agent_executor.invoke({"input":question})["output"]
 
 

@@ -23,3 +23,5 @@ pdfminer
 pdfminer.six
 amazon-textract-caller
 neo4j
+wikipedia
+google-search-results

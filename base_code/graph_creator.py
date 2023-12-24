@@ -22,9 +22,16 @@ def create_graph_from_documents(list_of_documents):
     the graph.  Output is a re-written graph that 
     must be written in pure Cypher because it will be read into
     Neo4j using automated tools.  For this reason, every Cypher state must end in
-    a semicolon.  Any notes or comments explaining the graph must be proper
-    Cypher comments to avoid confusing the Neo4j database system when the Cypher
-    statements are read in.  Do not repeat variables and do not repeat entities
+    a semicolon.  Under NO circumstances should any item that is not
+    a pure Cypher statement be left uncommented because the user will read the
+    final output directly into Neo4j!  It is absolutely unacceptable if even one
+    line of output that is not pure Cypher is left uncommented.
+    However, you must include good English comments so that human readers and yourself
+    can understand the semantic meaning of the graph and use such knowledge to
+    guide future updates, but you MUST comment out these comments so they do NOT
+    interfere with automated loading of the data - do NOT leave them uncommented
+    under any possible circumstances!
+    Do not repeat variables and do not repeat entities
     that already exist.  You are not augmenting but actually re-writing the graph
     so please focus only on major entities and core relationships.  If the graph
     is blank, then you must write a new graph based on the document you have.  Be
@@ -45,8 +52,8 @@ def create_graph_from_documents(list_of_documents):
         verbose=True
     )
 
-    llm_model = ChatOpenAI(model='gpt-3.5-turbo-16k')
-    #llm_model = ChatOpenAI(model='gpt-4')
+    #llm_model = ChatOpenAI(model='gpt-3.5-turbo-16k')
+    llm_model = ChatOpenAI(model='gpt-4')
 
     working_chain = prompt | llm_model | StrOutputParser()
 
@@ -73,6 +80,7 @@ def create_graph_from_documents(list_of_documents):
                 doc_string = current_document["new_document"]
             try:
                 current_output = working_chain.batch([input_dictionary])
+                print("\n\n%s\n\n" % (current_output[0],))
                 print("Document number %d\n" % (document_index,))
                 print(cb)
 
@@ -98,3 +106,44 @@ def create_graph_from_documents(list_of_documents):
     return list_of_outputs
 
 # End function create_graph_from_documents
+
+def scrub_graph_output(input_filename, output_filename):
+
+    llm = OpenAI(temperature=0)
+    # Notice that "chat_history" is present in the prompt template
+    template = """
+    Read in the existing text under existing graph.  
+
+    1. Any statement that is not
+    a syntactically valid Cypher sstatement must be commented out, parituclarly if
+    it is a natural language statement.
+
+    2. Check for and do your best to fix any syntax error in the Cypher statements.
+
+    3. Fix any issues that would cause the input not to work properly when
+    ingested into Neo4j.
+
+    Existing graph:
+    {existing_graph}
+
+    Response:"""
+    prompt = PromptTemplate.from_template(template)
+
+    #llm_model = ChatOpenAI(model='gpt-3.5-turbo-16k')
+    llm_model = ChatOpenAI(model='gpt-4')
+
+    working_chain = prompt | llm_model | StrOutputParser()
+
+    with open(input_filename,'r') as fp:
+        document_string = fp.read()
+    
+    input_dictionary = {"existing_graph": document_string}
+
+    output_list = working_chain.batch([input_dictionary])
+
+    new_output = output_list[0]
+
+    with open(output_filename,'w') as fp:
+        fp.write(new_output)
+
+# End function scrub_graph_output

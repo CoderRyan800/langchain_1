@@ -186,6 +186,32 @@ CREATE (ArticleX)-[:CONTAINS]->(DistributionAward)
 
 // Note: These nodes provide a detailed breakdown of Article X, representing each major subsection and their respective contents for easy navigation and understanding in the Neo4j graph database.
 
+// Create Subsection Nodes for Article XI with Summaries and Page Numbers
+CREATE (NoPartition:Section {title: '11.01 No Partition; Exceptions; Power of Attorney', summary: 'Details the restrictions on partitioning the property and exceptions to these rules.', pageNumber: 'XI-1'})
+CREATE (ProceedsPartitionSale:Section {title: '11.02 Proceeds of Partition Sale', summary: 'Specifies how proceeds from any partition sale are to be handled and distributed.', pageNumber: 'XI-1'})
+CREATE (NoSeparateConveyance:Section {title: '11.03 No Separate Conveyance of Condominium Components', summary: 'Outlines rules against the separate conveyance of individual condominium components.', pageNumber: 'XI-2'})
+CREATE (ArticleXI)-[:CONTAINS]->(NoPartition)
+CREATE (ArticleXI)-[:CONTAINS]->(ProceedsPartitionSale)
+CREATE (ArticleXI)-[:CONTAINS]->(NoSeparateConveyance)
+
+// Note: These nodes provide a detailed breakdown of Article XI, representing each major subsection and their respective contents for easy navigation and understanding in the Neo4j graph database.
+
+// Create Subsection Nodes for Article XII with Summaries and Page Numbers
+CREATE (RightsEasementsDeclarant:Section {title: '12.01 Certain Rights and Easements Reserved to Declarant', summary: 'Specifies certain rights and easements reserved specifically for the Declarant.', pageNumber: 'XII-1'})
+CREATE (EasementsOwners:Section {title: '12.02 Certain Easements for Owners', summary: 'Outlines easements granted to owners for access, use, and enjoyment of the property.', pageNumber: 'XII-1'})
+CREATE (EasementsAssociation:Section {title: '12.03 Certain Easements for Association', summary: 'Describes easements that are specifically designated for use by the Association.', pageNumber: 'XII-1'})
+CREATE (Encroachment:Section {title: '12.04 Encroachment', summary: 'Addresses issues related to encroachment of units or common areas onto adjacent property.', pageNumber: 'XII-1'})
+CREATE (CreationEasements:Section {title: '12.05 Creation of Easements', summary: 'Details the process and conditions for creating new easements within the property.', pageNumber: 'XII-2'})
+CREATE (UtilityEasements:Section {title: '12.06 Utility Easements Granted by the Association', summary: 'Covers utility easements that the Association may grant for service providers.', pageNumber: 'XII-2'})
+CREATE (ArticleXII)-[:CONTAINS]->(RightsEasementsDeclarant)
+CREATE (ArticleXII)-[:CONTAINS]->(EasementsOwners)
+CREATE (ArticleXII)-[:CONTAINS]->(EasementsAssociation)
+CREATE (ArticleXII)-[:CONTAINS]->(Encroachment)
+CREATE (ArticleXII)-[:CONTAINS]->(CreationEasements)
+CREATE (ArticleXII)-[:CONTAINS]->(UtilityEasements)
+
+// Note: These nodes provide a comprehensive representation of Article XII, each major subsection and their respective contents for clarity and ease of understanding in the Neo4j graph database.
+
 
 
 

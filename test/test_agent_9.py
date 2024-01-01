@@ -36,7 +36,6 @@ def get_exception_data(e, depth = 1):
         exception_data = traceback.format_exception(type(e),e,tb)
         exception_string_1 = json.dumps(exception_data,indent=4)
         exception_string_2 = "".join(traceback.TracebackException.from_exception(e).format())
-        # 1 / 0 # Try to exceed exception depth limit
         return_dict = {
             "exception_stack_trace": exception_string_2,
             "exception_data": exception_string_1
@@ -74,22 +73,6 @@ def present_exception_data_to_agent(e, agent_executor_object):
     return return_dict
 
 # End code to warn agent of exception in own code.
-
-
-# Testing exception handling with an eye toward extracing
-# stack information.
-
-try:
-
-    # To test exception handling, we are intentionally
-    # going to trigger a division by zero exception.
-
-    dummy_var = 1 / 0
-
-except Exception as e:
-
-    exception_string = json.dumps(get_exception_data(e),indent=4)
-    print(exception_string)
 
 loader = PythonLoader("/Users/ryanmukai/Documents/github/langchain_1/test/test_agent_9.py")
 
@@ -167,9 +150,6 @@ while not stop_flag:
             continue 
 
         agent_executor.invoke({"input":input_string})["output"]
-
-        # To test exception handling, we are intentionally
-        # going to trigger a division by zero exception.
 
         dummy_var = 1 / 0
 

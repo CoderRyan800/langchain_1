@@ -1,5 +1,6 @@
 import sys 
 import json
+import pickle
 import traceback
 
 from langchain.agents import AgentType, Tool, initialize_agent
@@ -25,6 +26,8 @@ from langchain.tools import Tool
 from langchain.utilities import GoogleSearchAPIWrapper
 
 from langchain.utilities import StackExchangeAPIWrapper
+
+MEMORY_BINARY_PICKLE_FILENAME = "memory_state.pkl"
 
 # Utility function for getting exception data to present to
 # the LLM that runs the agent.
@@ -120,7 +123,19 @@ tools = [
     google_search_tool
 ]
 
-memory = ConversationBufferMemory(memory_key="chat_history")
+#memory = ConversationBufferMemory(memory_key="chat_history")
+
+
+
+# Initialize the ConversationBufferMemory
+try: 
+    # Load the JSON file
+    with open(MEMORY_BINARY_PICKLE_FILENAME, 'rb') as f:
+        memory = pickle.load(f)
+except:
+    memory = ConversationBufferMemory(memory_key="chat_history")
+    print("\nFile %s does not appear to be valid - starting new memory!\n" % (MEMORY_BINARY_PICKLE_FILENAME,))
+
 
 llm = OpenAI(temperature=0, model_name="gpt-4-0613")
 agent_executor = initialize_agent(
@@ -162,5 +177,13 @@ json_string = json.dumps(json.loads(memory.json()),indent=4)
 fp = open('Agent_Memory.json','w')
 
 fp.write(json_string)
+
+fp.close()
+
+# Pickle the memory as well!
+
+fp = open(MEMORY_BINARY_PICKLE_FILENAME,'wb')
+
+pickle.dump(memory,fp)
 
 fp.close()

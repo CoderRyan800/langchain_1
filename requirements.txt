@@ -25,3 +25,6 @@ amazon-textract-caller
 neo4j
 wikipedia
 google-search-results
+deeplake
+gitpython
+faiss-cpu

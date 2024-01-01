@@ -166,7 +166,7 @@ while not stop_flag:
 
         agent_executor.invoke({"input":input_string})["output"]
 
-        dummy_var = 1 / 0
+        # dummy_var = 1 / 0
 
     except Exception as e:
         exception_dictionary = present_exception_data_to_agent(e, agent_executor)

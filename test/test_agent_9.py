@@ -1,4 +1,6 @@
+import sys 
 import json
+import traceback
 
 from langchain.agents import AgentType, Tool, initialize_agent
 from langchain.agents.react.base import DocstoreExplorer
@@ -21,6 +23,73 @@ from langchain.vectorstores import Chroma
 
 from langchain.tools import Tool
 from langchain.utilities import GoogleSearchAPIWrapper
+
+from langchain.utilities import StackExchangeAPIWrapper
+
+# Utility function for getting exception data to present to
+# the LLM that runs the agent.
+
+def get_exception_data(e, depth = 1):
+
+    try:
+        tb = e.__traceback__
+        exception_data = traceback.format_exception(type(e),e,tb)
+        exception_string_1 = json.dumps(exception_data,indent=4)
+        exception_string_2 = "".join(traceback.TracebackException.from_exception(e).format())
+        # 1 / 0 # Try to exceed exception depth limit
+        return_dict = {
+            "exception_stack_trace": exception_string_2,
+            "exception_data": exception_string_1
+        }
+        return(return_dict)
+    except Exception as e2:
+        if depth >= 1:
+            get_exception_data(e2, depth=depth-1)
+        else:
+            traceback.print_exc()
+            print("\nWARNING: MAX EXCEPTION DEPTH LIMIT EXCEEDED!")
+
+# End method get_exception_data
+            
+def present_exception_data_to_agent(e, agent_executor_object):
+
+    exception_dictionary = get_exception_data(e)
+    exception_string = json.dumps(exception_dictionary,indent=4)
+    message_to_agent = (
+        "THIS IS AN AUTO GENERATED MESSAGE FROM THE EXCEPTION HANDLING CODE: \n" +
+        "The following exception data have been generated during execution: \n" +
+        "%s\n" +
+        "Please read the information and examine your own source code using the tool provided for that purpose to advise on the problem and its possible solutions.\n" +
+        "Please note the trace may yield the wrong line number so search the code in case the exception traceback data has the wrong line number(s) and point out possible problems." +
+        "Do not ask the human to search the code for the error.  Scour the code for the error(s) yourself and point them out even if the stack trace lacks the correct line number!"
+    ) % (exception_string,)
+
+    agent_response = agent_executor_object.invoke({"input":message_to_agent})["output"]
+
+    return_dict = {
+        "exception_information": message_to_agent,
+        "agent_response": agent_response
+    }
+
+    return return_dict
+
+# End code to warn agent of exception in own code.
+
+
+# Testing exception handling with an eye toward extracing
+# stack information.
+
+try:
+
+    # To test exception handling, we are intentionally
+    # going to trigger a division by zero exception.
+
+    dummy_var = 1 / 0
+
+except Exception as e:
+
+    exception_string = json.dumps(get_exception_data(e),indent=4)
+    print(exception_string)
 
 loader = PythonLoader("/Users/ryanmukai/Documents/github/langchain_1/test/test_agent_9.py")
 
@@ -89,13 +158,24 @@ stop_flag = False
 
 while not stop_flag:
 
-    input_string = input("Please ask the agent a question: ")
+    try:
 
-    if input_string == 'STOP':
-        stop_flag = True 
-        continue 
+        input_string = input("Please ask the agent a question: ")
 
-    agent_executor.invoke({"input":input_string})["output"]
+        if input_string == 'STOP':
+            stop_flag = True 
+            continue 
+
+        agent_executor.invoke({"input":input_string})["output"]
+
+        # To test exception handling, we are intentionally
+        # going to trigger a division by zero exception.
+
+        dummy_var = 1 / 0
+
+    except Exception as e:
+        exception_dictionary = present_exception_data_to_agent(e, agent_executor)
+        print(json.dumps(exception_dictionary,indent=4))   
 
 json_string = json.dumps(json.loads(memory.json()),indent=4)
 

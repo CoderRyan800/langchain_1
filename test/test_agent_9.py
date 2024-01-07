@@ -9,7 +9,9 @@ from langchain.docstore import Wikipedia
 from langchain.llms import OpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.document_loaders import TextLoader, PythonLoader
+from langchain.retrievers.web_research import WebResearchRetriever
 
+from langchain.chat_models import ChatOpenAI
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import FAISS
@@ -106,21 +108,44 @@ google_search_tool = Tool(
     func=google_search.run,
 )
 
+# Vectorstore
+vectorstore = Chroma(
+    embedding_function=OpenAIEmbeddings(), persist_directory="./chroma_db_oai"
+)
+
+# LLM
+llm = ChatOpenAI(temperature=0)
+
+# Search
+search = GoogleSearchAPIWrapper()
+
+# Initialize
+web_research_retriever = WebResearchRetriever.from_llm(
+    vectorstore=vectorstore, llm=llm, search=search
+)
+
 google_search_tool.run("Obama's first name?")
+
+tool_web_search_retriever = create_retriever_tool(
+    web_research_retriever,
+    "search_web_using_google",
+    "Searches and retrieve information from the World Wide Web",
+)
 
 tools = [
     Tool(
         name="Search",
         func=docstore.search,
-        description="useful for when you need to ask with search",
+        description="useful for when you need to ask with search using Wikipedia",
     ),
     Tool(
         name="Lookup",
         func=docstore.lookup,
-        description="useful for when you need to ask with lookup",
+        description="useful for when you need to ask with lookup using Wikipedia",
     ),
     tool_retriever,
-    google_search_tool
+
+    tool_web_search_retriever
 ]
 
 #memory = ConversationBufferMemory(memory_key="chat_history")

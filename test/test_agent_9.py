@@ -37,15 +37,17 @@ MEMORY_BINARY_PICKLE_FILENAME = "memory_state.pkl"
 def get_exception_data(e, depth = 1):
 
     try:
-        tb = e.__traceback__
-        exception_data = traceback.format_exception(type(e),e,tb)
-        exception_string_1 = json.dumps(exception_data,indent=4)
-        exception_string_2 = "".join(traceback.TracebackException.from_exception(e).format())
-        return_dict = {
-            "exception_stack_trace": exception_string_2,
-            "exception_data": exception_string_1
+        # Get the exception stack trace
+        exception_stack_trace = ''.join(traceback.format_exception(etype=type(e), value=e, tb=e.__traceback__))
+
+        # Get the exception data
+        exception_data = str(e)
+
+        # Return a dictionary containing the exception stack trace and exception data
+        return {
+            "exception_stack_trace": exception_stack_trace,
+            "exception_data": exception_data
         }
-        return(return_dict)
     except Exception as e2:
         if depth >= 1:
             get_exception_data(e2, depth=depth-1)

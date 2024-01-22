@@ -7,7 +7,7 @@ from langchain.agents import AgentType, Tool, initialize_agent
 from langchain.agents.react.base import DocstoreExplorer
 from langchain.docstore import Wikipedia
 from langchain.llms import OpenAI
-from langchain.memory import ConversationBufferMemory
+from langchain.memory import ConversationBufferMemory, ConversationSummaryMemory
 from langchain.document_loaders import TextLoader, PythonLoader
 from langchain.retrievers.web_research import WebResearchRetriever
 
@@ -152,7 +152,7 @@ tools = [
 
 #memory = ConversationBufferMemory(memory_key="chat_history")
 
-
+llm = OpenAI(temperature=0, model_name="gpt-4-0613")
 
 # Initialize the ConversationBufferMemory
 try: 
@@ -160,11 +160,12 @@ try:
     with open(MEMORY_BINARY_PICKLE_FILENAME, 'rb') as f:
         memory = pickle.load(f)
 except:
-    memory = ConversationBufferMemory(memory_key="chat_history")
+    #memory = ConversationBufferMemory(memory_key="chat_history")
+    memory = ConversationSummaryMemory(llm=llm, memory_key="chat_history")
     print("\nFile %s does not appear to be valid - starting new memory!\n" % (MEMORY_BINARY_PICKLE_FILENAME,))
 
 
-llm = OpenAI(temperature=0, model_name="gpt-4-0613")
+
 agent_executor = initialize_agent(
     tools,
     llm,
@@ -199,18 +200,35 @@ while not stop_flag:
         exception_dictionary = present_exception_data_to_agent(e, agent_executor)
         print(json.dumps(exception_dictionary,indent=4))   
 
-json_string = json.dumps(json.loads(memory.json()),indent=4)
+    finally:
 
-fp = open('Agent_Memory.json','w')
+        fp = open(MEMORY_BINARY_PICKLE_FILENAME,'wb')
 
-fp.write(json_string)
+        pickle.dump(memory,fp)
 
-fp.close()
+        fp.close()
+
+        # json_string = json.dumps(json.loads(memory.json()),indent=4)
+
+        # fp = open('Agent_Memory.json','w')
+
+        # fp.write(json_string)
+
+        # fp.close()
+
+    # End finally block to save agent memory on each iteration, especially if
+    # we have a crash.
+
+    # json_string = json.dumps(json.loads(memory.json()),indent=4)
+
+    # fp = open('Agent_Memory.json','w')
+
+    # fp.write(json_string)
+
+    # fp.close()
+
+# End the while loop.
 
 # Pickle the memory as well!
 
-fp = open(MEMORY_BINARY_PICKLE_FILENAME,'wb')
 
-pickle.dump(memory,fp)
-
-fp.close()

@@ -135,16 +135,16 @@ tool_web_search_retriever = create_retriever_tool(
 )
 
 tools = [
-    Tool(
-        name="Search",
-        func=docstore.search,
-        description="useful for when you need to ask with search using Wikipedia",
-    ),
-    Tool(
-        name="Lookup",
-        func=docstore.lookup,
-        description="useful for when you need to ask with lookup using Wikipedia",
-    ),
+    # Tool(
+    #     name="Search",
+    #     func=docstore.search,
+    #     description="useful for when you need to ask with search using Wikipedia",
+    # ),
+    # Tool(
+    #     name="Lookup",
+    #     func=docstore.lookup,
+    #     description="useful for when you need to ask with lookup using Wikipedia",
+    # ),
     tool_retriever,
 
     tool_web_search_retriever

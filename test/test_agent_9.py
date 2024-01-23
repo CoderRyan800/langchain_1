@@ -208,24 +208,24 @@ while not stop_flag:
 
         fp.close()
 
-        # json_string = json.dumps(json.loads(memory.json()),indent=4)
+        json_string = json.dumps(memory.to_json(),indent=4)
 
-        # fp = open('Agent_Memory.json','w')
+        fp = open('Agent_Memory.json','w')
 
-        # fp.write(json_string)
+        fp.write(json_string)
 
-        # fp.close()
+        fp.close()
 
     # End finally block to save agent memory on each iteration, especially if
     # we have a crash.
 
-    # json_string = json.dumps(json.loads(memory.json()),indent=4)
+    json_string = json.dumps(memory.to_json(),indent=4)
 
-    # fp = open('Agent_Memory.json','w')
+    fp = open('Agent_Memory.json','w')
 
-    # fp.write(json_string)
+    fp.write(json_string)
 
-    # fp.close()
+    fp.close()
 
 # End the while loop.
 

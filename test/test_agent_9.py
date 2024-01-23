@@ -7,9 +7,11 @@ from langchain.agents import AgentType, Tool, initialize_agent
 from langchain.agents.react.base import DocstoreExplorer
 from langchain.docstore import Wikipedia
 from langchain.llms import OpenAI
-from langchain.memory import ConversationBufferMemory
+from langchain.memory import ConversationBufferMemory, ConversationSummaryMemory
 from langchain.document_loaders import TextLoader, PythonLoader
+from langchain.retrievers.web_research import WebResearchRetriever
 
+from langchain.chat_models import ChatOpenAI
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import FAISS
@@ -35,15 +37,17 @@ MEMORY_BINARY_PICKLE_FILENAME = "memory_state.pkl"
 def get_exception_data(e, depth = 1):
 
     try:
-        tb = e.__traceback__
-        exception_data = traceback.format_exception(type(e),e,tb)
-        exception_string_1 = json.dumps(exception_data,indent=4)
-        exception_string_2 = "".join(traceback.TracebackException.from_exception(e).format())
-        return_dict = {
-            "exception_stack_trace": exception_string_2,
-            "exception_data": exception_string_1
+        # Get the exception stack trace
+        exception_stack_trace = ''.join(traceback.format_exception(etype=type(e), value=e, tb=e.__traceback__))
+
+        # Get the exception data
+        exception_data = str(e)
+
+        # Return a dictionary containing the exception stack trace and exception data
+        return {
+            "exception_stack_trace": exception_stack_trace,
+            "exception_data": exception_data
         }
-        return(return_dict)
     except Exception as e2:
         if depth >= 1:
             get_exception_data(e2, depth=depth-1)
@@ -106,26 +110,49 @@ google_search_tool = Tool(
     func=google_search.run,
 )
 
+# Vectorstore
+vectorstore = Chroma(
+    embedding_function=OpenAIEmbeddings(), persist_directory="./chroma_db_oai"
+)
+
+# LLM
+llm = ChatOpenAI(temperature=0)
+
+# Search
+search = GoogleSearchAPIWrapper()
+
+# Initialize
+web_research_retriever = WebResearchRetriever.from_llm(
+    vectorstore=vectorstore, llm=llm, search=search
+)
+
 google_search_tool.run("Obama's first name?")
 
+tool_web_search_retriever = create_retriever_tool(
+    web_research_retriever,
+    "search_web_using_google",
+    "Searches and retrieve information from the World Wide Web",
+)
+
 tools = [
-    Tool(
-        name="Search",
-        func=docstore.search,
-        description="useful for when you need to ask with search",
-    ),
-    Tool(
-        name="Lookup",
-        func=docstore.lookup,
-        description="useful for when you need to ask with lookup",
-    ),
+    # Tool(
+    #     name="Search",
+    #     func=docstore.search,
+    #     description="useful for when you need to ask with search using Wikipedia",
+    # ),
+    # Tool(
+    #     name="Lookup",
+    #     func=docstore.lookup,
+    #     description="useful for when you need to ask with lookup using Wikipedia",
+    # ),
     tool_retriever,
-    google_search_tool
+
+    tool_web_search_retriever
 ]
 
 #memory = ConversationBufferMemory(memory_key="chat_history")
 
-
+llm = OpenAI(temperature=0, model_name="gpt-4-0613")
 
 # Initialize the ConversationBufferMemory
 try: 
@@ -133,11 +160,12 @@ try:
     with open(MEMORY_BINARY_PICKLE_FILENAME, 'rb') as f:
         memory = pickle.load(f)
 except:
-    memory = ConversationBufferMemory(memory_key="chat_history")
+    #memory = ConversationBufferMemory(memory_key="chat_history")
+    memory = ConversationSummaryMemory(llm=llm, memory_key="chat_history")
     print("\nFile %s does not appear to be valid - starting new memory!\n" % (MEMORY_BINARY_PICKLE_FILENAME,))
 
 
-llm = OpenAI(temperature=0, model_name="gpt-4-0613")
+
 agent_executor = initialize_agent(
     tools,
     llm,
@@ -166,24 +194,41 @@ while not stop_flag:
 
         agent_executor.invoke({"input":input_string})["output"]
 
-        dummy_var = 1 / 0
+        # dummy_var = 1 / 0
 
     except Exception as e:
         exception_dictionary = present_exception_data_to_agent(e, agent_executor)
         print(json.dumps(exception_dictionary,indent=4))   
 
-json_string = json.dumps(json.loads(memory.json()),indent=4)
+    finally:
 
-fp = open('Agent_Memory.json','w')
+        fp = open(MEMORY_BINARY_PICKLE_FILENAME,'wb')
 
-fp.write(json_string)
+        pickle.dump(memory,fp)
 
-fp.close()
+        fp.close()
+
+        json_string = json.dumps(memory.to_json(),indent=4)
+
+        fp = open('Agent_Memory.json','w')
+
+        fp.write(json_string)
+
+        fp.close()
+
+    # End finally block to save agent memory on each iteration, especially if
+    # we have a crash.
+
+    json_string = json.dumps(memory.to_json(),indent=4)
+
+    fp = open('Agent_Memory.json','w')
+
+    fp.write(json_string)
+
+    fp.close()
+
+# End the while loop.
 
 # Pickle the memory as well!
 
-fp = open(MEMORY_BINARY_PICKLE_FILENAME,'wb')
 
-pickle.dump(memory,fp)
-
-fp.close()

@@ -1,7 +1,7 @@
 numpy
 scipy
 pandas
-openai
+openai==0.28.1
 langchain
 jupyter
 python-dotenv
@@ -28,3 +28,5 @@ google-search-results
 deeplake
 gitpython
 faiss-cpu
+google-api-python-client
+html2text
